@@ -1,0 +1,69 @@
+
+lowdefy: 3.23.2
+name: Lowdefy starter
+
+menus:
+  - id: default
+    links:
+      - id: new-ticket
+        type: MenuLink
+        properties:
+          icon: AlertOutlined
+          title: New Gateway
+        pageId: new gateway
+      - id: welcome
+        type: MenuLink
+        properties:
+          icon: HomeOutlined
+          title: Home
+        pageId: welcome
+
+pages:
+  - _ref: new-gateway.yaml
+  - id: welcome
+    type: PageHeaderMenu
+    properties:
+      title: Welcome
+    areas:
+      content:
+        justify: center
+        blocks:
+
+          - id: content_card
+            type: Card
+            style:
+              maxWidth: 800
+            blocks:
+
+
+              - id: content
+                type: Result
+                properties:
+                  title: Welcome to SSA Portal
+                  subTitle: You can interact now with Gateways
+
+                areas:
+                  extra:
+                    blocks:
+                      - id: docs_button
+                        type: Button
+                        properties:
+                          size: large
+                          title: Contact us on Teams
+                          color: '#1890ff'
+                        events:
+                          onClick:
+                            - id: link_to_docs
+                              type: Link
+                              params:
+                                url: https://docs.lowdefy.com
+                                newTab: true
+      footer:
+        blocks:
+          - id: footer
+            type: Paragraph
+            properties:
+              type: secondary
+              content: |
+                Made by a Lowdefy 🤖
+
