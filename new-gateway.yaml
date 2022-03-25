@@ -16,40 +16,132 @@ blocks:
         properties:
           content: Create a gateway # Change the title on the page.
           level: 3 # Make the title a little smaller (an html `<h3>`).
-
-      - id: ticket_title
+      - id: enterprise
+        type: Selector
+        required: true
+        properties:
+          title: Enterprise/Function
+          size: large
+          options:
+            - test1
+            - test2
+            - test3
+      - id: group_name
         type: TextInput
         properties:
-          title: Gateway Name
+          title: Group/Team Name
+      - id: request_name
+        type: TextInput
+        properties:
+          title: What do you want to call this Source?
+
+      - id: gateway_name
+        type: Descriptions
+        properties:
+          title: Gateway Name.
+          items:
+            - label: Item One
+              value: test
+              span: null
+              style: null   
+
       - id: ticket_type
         type: ButtonSelector
         properties:
-          title: Gateway Cluster
+          title: Gateway Cluster to pick
           options: # Set the allowed options
             - NA
             - LA
             - EMEA
+            - APAC
             - CDP
+
+
+      - id: data_source_type
+        type: ButtonSelector
+        required: true
+
+        properties:
+          title: Data Source Type
+          size: large
+          options:
+            - CDP
+            - MYSQL
       - id: connection_detail
         type: TextInput
+        visible:
+          # These operators evaluate to `true` when the type field is selected and is not equal to the "Feedback" option.
+          _eq:
+            - _state: data_source_type
+            - MYSQL
         properties:
           title: Connection Detail
+
+
       - id: database_name
         type: TextInput
+        visible:
+          # These operators evaluate to `true` when the type field is selected and is not equal to the "Feedback" option.
+          _eq:
+            - _state: data_source_type
+            - MYSQL
         properties:
-          title: Database
+          title: Database Name
+
+      - id: email
+        type: TextInput
+        validate:
+          - message: Please enter a email address.
+            status: error
+            pass:
+              _not:
+                _not:
+                  _state: email
+          - message: Please provide a valid email address.
+            status: error
+            pass:
+              _regex: '^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
+        properties: 
+          title: Email of the gateway owner
+
+      - id: authentication_method
+        type: Selector
+        required: true
+        properties:
+          title: Authentication Method
+          size: large
+          options:
+            - Windows
+            - Basic
+            - Anonymous
+
       - id: ticket_username
         type: TextInput
+        validate:
+          - message: Please provide a Process Account.
+            status: error
+            pass:
+              _not:
+                _not:
+                  _state: ticket_username
+          - message: Please provide a valid Process Account.
+            status: error
+            pass:
+              _regex: '^[Pp][Ss][0-9]{4}$' 
         properties:
           title: Process Account
-      - id: ticket_username
-        type: TextInput
-        properties:
-          title: Process Account
-      - id: ticket_password
+
+      - id: ticket_pasword
         type: PasswordInput
+        
         properties:
           title: Password
+
+
+
+
+
+
       - id: ticket_description
         type: TextArea
         properties:
@@ -67,6 +159,11 @@ blocks:
         type: Button
         layout:
           span: 12
+
+        events:
+          onClick:
+            - id: validate
+              type: Validate
         properties:
           title: Submit
           block: true
