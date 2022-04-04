@@ -1,4 +1,4 @@
-id: new gateway
+id: new_gateway
 type: PageHeaderMenu
 properties:
   title: New Gateway # The title in the browser tab.
@@ -28,8 +28,22 @@ blocks:
             - test3
       - id: group_name
         type: TextInput
+
+              
         properties:
           title: Group/Team Name
+
+ #       _if:
+ #         test:
+ #           _eq:
+ #             - _state: group_name
+ #             - test
+ #         then:
+ #           - message: Please provide a Process Account.
+ #            status: error
+ #         else:
+          
+                  
       - id: request_name
         type: TextInput
         properties:
@@ -40,10 +54,31 @@ blocks:
         properties:
           title: Gateway Name.
           items:
-            - label: Item One
-              value: test
-              span: null
+            
+            - label:
+              
+              value:
+                _state: enterprise
+              span: -1
               style: null   
+            
+            - label:
+ 
+              value:
+                _state: group_name
+
+
+              span: null
+              style: null
+
+                      
+            - label:
+              
+              value:
+                _state: request_name
+
+              span: null
+              style: null     
 
       - id: ticket_type
         type: ButtonSelector
@@ -70,7 +105,6 @@ blocks:
       - id: connection_detail
         type: TextInput
         visible:
-          # These operators evaluate to `true` when the type field is selected and is not equal to the "Feedback" option.
           _eq:
             - _state: data_source_type
             - MYSQL

@@ -5,12 +5,12 @@ name: Lowdefy starter
 menus:
   - id: default
     links:
-      - id: new-ticket
-        type: MenuLink
-        properties:
-          icon: AlertOutlined
-          title: New Gateway
-        pageId: new gateway
+#      - id: new-ticket
+#        type: MenuLink
+#        properties:
+#          icon: AlertOutlined
+#          title: New Gateway
+#        pageId: new_gateway
       - id: welcome
         type: MenuLink
         properties:
@@ -20,6 +20,7 @@ menus:
 
 pages:
   - _ref: new-gateway.yaml
+  - _ref: prerequisites.yaml
   - id: welcome
     type: PageHeaderMenu
     properties:
@@ -33,31 +34,72 @@ pages:
             type: Card
             style:
               maxWidth: 800
+            properties:
             blocks:
-
-
-              - id: content
-                type: Result
+            
+              - id: block_id
+                type: Title
                 properties:
-                  title: Welcome to SSA Portal
-                  subTitle: You can interact now with Gateways
+                  content: Power Bi Gateway Datasource
+                  level: 3
+        
+              - id: content
+                type: Card
+                properties:
+                  title: What are you trying to achieve?
+                layout:
+                  align: bottom
+                blocks:
+                - id: content_card
+                  type: Card
+                  layout:
+                    size: 800 # Set the size of the card so it does not fill the full screen.
+                    contentGutter: 16 # Make a 16px gap between all blocks in this card.
+                  blocks:
+                  - id: submit_button
+                    type: Button
+                    layout:
+                      span: 12
+                    events:
+                      onClick:
+                        - id: validate
+                          type: Link
+                          params: prerequisites_page
+                    properties:
+                      title: Create Datasource
+                      block: true
 
-                areas:
-                  extra:
-                    blocks:
-                      - id: docs_button
-                        type: Button
-                        properties:
-                          size: large
-                          title: Contact us on Teams
-                          color: '#1890ff'
-                        events:
-                          onClick:
-                            - id: link_to_docs
-                              type: Link
-                              params:
-                                url: https://docs.lowdefy.com
-                                newTab: true
+    
+                
+                  - id: submit_button
+                    type: Button
+                    layout:
+                      span: 12
+                    events:
+                    properties:
+                      title: Modify existing Datasource
+                      block: true
+
+  
+
+                  - id: submit_button
+                    type: Button
+                    layout:
+                      span: 12
+                    events:
+                    properties:
+                      title: Get access to existing Datasour
+                      block: true
+                  - id: submit_button
+                    type: Button
+                    layout:
+                      span: 12
+                    events:
+                    properties:
+                      title: Contact Us
+                      block: true
+                                  
+                
       footer:
         blocks:
           - id: footer
@@ -65,5 +107,6 @@ pages:
             properties:
               type: secondary
               content: |
-                Made by a Lowdefy 🤖
+                DUX Team  
+
 

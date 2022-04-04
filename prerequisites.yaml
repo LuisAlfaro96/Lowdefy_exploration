@@ -1,0 +1,66 @@
+#lowdefy: 3.23.2
+
+pages:
+- _ref: new-gateway.yaml
+id: prerequisites_page
+type: PageHeaderMenu
+properties:
+  title: Pre-requisites # The title in the browser tab.
+layout:
+  contentJustify: center # Center the contents of the page.
+blocks:
+  - id: block_id
+    type: Result
+    properties:
+      title: Pre-requisites
+      level: 3
+      icon: WarningOutlined
+      subTitle: Make sure you are ready with the below details before proceeding
+    
+  - id: content_card
+    type: Card
+    layout:
+      size: 800 # Set the size of the card so it does not fill the full screen.
+      contentGutter: 13 # Make a 16px gap between all blocks in this card.
+    blocks:
+
+      - id: block_id
+        type: Box
+        properties:
+          content: '1- You have a process account'
+      - id: block_id
+        type: Box
+        properties:
+          content: '2- The Process account is set to Password never expire'
+      - id: block_id
+        type: Box
+        properties:
+          content: '3- The Process account has access to your data'
+      - id: block_id
+        type: Box
+        properties:
+          content: '4- Mail Enabled Security Group / Mail IDS to grant access to the Power Bi DataSource for  Approved Users'
+
+      - id: submit_button
+        type: Button
+        layout:
+          span: 12
+          
+        events:
+          onClick:
+            - id: go_to_new_gateway
+              type: Link
+              params: new_gateway
+        properties:
+          title: Create Datasource
+          block: true
+          justify: center
+          shape: round
+    
+         
+    
+ 
+      
+
+          
+
